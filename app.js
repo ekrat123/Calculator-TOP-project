@@ -101,6 +101,10 @@ clearBtn.addEventListener("click", clearAll);
 function deleteLast() {
   if (display.textContent != false) {
     let valueIndex = display.textContent.length - 1;
+    if (["+", "-", "*", "/"].includes(display.textContent[valueIndex])) {
+      operator = "";
+      firstNum = "0";
+    }
     display.textContent = display.textContent.slice(0, valueIndex);
   }
 }
