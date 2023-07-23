@@ -15,12 +15,13 @@ body {
   justify-content: center;
   align-items: center;
   background-color: rgba(128, 128, 128, 0.3);
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .container {
   background-color: rgba(0, 0, 0, 0.1);
-  min-width: 400px;
-  height: 500px;
+  width: 320px;
+  height: 400px;
   display: flex;
   flex-wrap: wrap;
   border: 5px solid rgb(40, 133, 136);
@@ -34,6 +35,8 @@ body {
   border-radius: 10px;
   text-align: end;
   padding: 0.75rem;
+  font-size: 2rem;
+  font-weight: 500;
 }
 
 button {
@@ -55,4 +58,8 @@ button {
 #equal {
   flex-basis: 50%;
   background-color: rgba(0, 0, 255, 0.507);
+}
+
+button:hover {
+  transform: scale(1.03);
 }
