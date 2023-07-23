@@ -1,8 +1,6 @@
 const display = document.querySelector(".display");
 const container = document.querySelector(".container");
 const buttons = document.querySelectorAll("button");
-/* const numBtn = document.querySelectorAll(".number");
-const opeBtn = container.querySelectorAll(".operator"); */
 const equalBtn = document.getElementById("equal");
 const clearBtn = document.getElementById("clear");
 
@@ -49,6 +47,9 @@ function updateDisplay() {
   if (clickedValue === "." && !display.textContent.includes(".")) {
     display.textContent += clickedValue;
   } else if (["+", "-", "*", "/"].includes(clickedValue)) {
+    if (operator && secondNum) {
+      getResult();
+    }
     operator = clickedValue;
     firstNum = display.textContent;
     display.textContent = firstNum + operator;
@@ -72,7 +73,6 @@ function getSecondNum() {
 }
 
 function getResult() {
-  let clickedValue = this.textContent;
   secondNum = getSecondNum();
   display.textContent =
     Math.floor(operate(operator, firstNum, secondNum) * 100) / 100;
@@ -89,3 +89,5 @@ function clearAll() {
 }
 
 clearBtn.addEventListener("click", clearAll);
+
+/* (typeof firstNum === Number && typeof secondNum === Number) */
