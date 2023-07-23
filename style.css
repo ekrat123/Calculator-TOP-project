@@ -52,11 +52,15 @@ button {
 }
 
 #clear {
-  flex-basis: 100%;
+  flex-basis: 50%;
   background-color: rgba(204, 185, 18, 0.5);
 }
 #equal {
   background-color: rgba(0, 0, 255, 0.507);
+}
+#delBtn {
+  flex-basis: 50%;
+  background-color: rgba(177, 14, 14, 0.767);
 }
 
 button:hover {

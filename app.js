@@ -1,13 +1,14 @@
 const display = document.querySelector(".display");
 const container = document.querySelector(".container");
-const buttons = document.querySelectorAll("button");
+const buttons = document.querySelectorAll("button.number, button.operator");
 const equalBtn = document.getElementById("equal");
 const clearBtn = document.getElementById("clear");
+const delBtn = document.getElementById("delBtn");
 
-let firstNum;
-let secondNum;
-let operator;
-let displayValue = "0";
+let firstNum = "0";
+let secondNum = "0";
+let operator = "";
+display.textContent = "0";
 
 function add(a, b) {
   return a + b;
@@ -44,20 +45,23 @@ function operate(operator, a, b) {
 
 function updateDisplay() {
   let clickedValue = this.textContent;
-  if (clickedValue === "." && !display.textContent.includes(".")) {
-    display.textContent += clickedValue;
-  } else if (["+", "-", "*", "/"].includes(clickedValue)) {
-    if (operator && secondNum) {
+
+  if (["+", "-", "*", "/"].includes(clickedValue)) {
+    if (operator && firstNum) {
       getResult();
     }
     operator = clickedValue;
     firstNum = display.textContent;
     display.textContent = firstNum + operator;
   } else {
-    if (display.textContent === "0") {
-      display.textContent = clickedValue;
-    } else {
+    if (clickedValue === "." && !display.textContent.includes(".")) {
       display.textContent += clickedValue;
+    } else {
+      if (display.textContent === "0") {
+        display.textContent = clickedValue;
+      } else {
+        display.textContent += clickedValue;
+      }
     }
   }
 }
@@ -76,6 +80,10 @@ function getResult() {
   secondNum = getSecondNum();
   display.textContent =
     Math.floor(operate(operator, firstNum, secondNum) * 100) / 100;
+  console.log(operator, firstNum, secondNum);
+  firstNum = "0";
+  secondNum = "0";
+  operator = "";
 }
 
 equalBtn.addEventListener("click", getResult);
@@ -90,4 +98,11 @@ function clearAll() {
 
 clearBtn.addEventListener("click", clearAll);
 
-/* (typeof firstNum === Number && typeof secondNum === Number) */
+function deleteLast() {
+  if (display.textContent != false) {
+    let valueIndex = display.textContent.length - 1;
+    display.textContent = display.textContent.slice(0, valueIndex);
+  }
+}
+
+delBtn.addEventListener("click", deleteLast);
