@@ -28,8 +28,8 @@ function divide(a, b) {
 }
 
 function operate(operator, a, b) {
-  a = parseInt(a);
-  b = parseInt(b);
+  a = parseFloat(a);
+  b = parseFloat(b);
   switch (operator) {
     case "+":
       return add(a, b);
@@ -46,7 +46,9 @@ function operate(operator, a, b) {
 
 function updateDisplay() {
   let clickedValue = this.textContent;
-  if (["+", "-", "*", "/"].includes(clickedValue)) {
+  if (clickedValue === "." && !display.textContent.includes(".")) {
+    display.textContent += clickedValue;
+  } else if (["+", "-", "*", "/"].includes(clickedValue)) {
     operator = clickedValue;
     firstNum = display.textContent;
     display.textContent = firstNum + operator;
