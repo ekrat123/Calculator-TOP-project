@@ -1,7 +1,8 @@
 const display = document.querySelector(".display");
 const container = document.querySelector(".container");
-const numBtn = document.querySelectorAll(".number");
-const opeBtn = container.querySelectorAll(".operator");
+const buttons = document.querySelectorAll("button");
+/* const numBtn = document.querySelectorAll(".number");
+const opeBtn = container.querySelectorAll(".operator"); */
 const equalBtn = document.getElementById("equal");
 const clearBtn = document.getElementById("clear");
 
@@ -45,42 +46,34 @@ function operate(operator, a, b) {
 
 function updateDisplay() {
   let clickedValue = this.textContent;
-  if (display.textContent === "0") {
-    display.textContent = clickedValue;
+  if (["+", "-", "*", "/"].includes(clickedValue)) {
+    operator = clickedValue;
+    firstNum = display.textContent;
+    display.textContent = firstNum + operator;
   } else {
-    display.textContent += clickedValue;
+    if (display.textContent === "0") {
+      display.textContent = clickedValue;
+    } else {
+      display.textContent += clickedValue;
+    }
   }
 }
 
-numBtn.forEach((btn) => {
-  btn.addEventListener("click", updateDisplay);
-});
-
-function getOperator() {
-  let clickedValue = this.textContent;
-  operator = clickedValue;
-  firstNum = display.textContent;
-  display.textContent += operator;
-}
-
-opeBtn.forEach((btn) => {
-  btn.addEventListener("click", getOperator);
+buttons.forEach((button) => {
+  button.addEventListener("click", updateDisplay);
 });
 
 function getSecondNum() {
   let clickedValue = display.textContent;
-  let operateIndex =
-    clickedValue["+"] ||
-    clickedValue["*"] ||
-    clickedValue["-"] ||
-    clickedValue["/"];
+  let operateIndex = clickedValue.indexOf(operator);
   return clickedValue.slice(operateIndex + 1);
 }
 
 function getResult() {
   let clickedValue = this.textContent;
   secondNum = getSecondNum();
-  display.textContent = operate(operator, firstNum, secondNum);
+  display.textContent =
+    Math.floor(operate(operator, firstNum, secondNum) * 100) / 100;
 }
 
 equalBtn.addEventListener("click", getResult);
@@ -90,6 +83,7 @@ function clearAll() {
   secondNum = "0";
   operator = "";
   display.textContent = "0";
+  displayValue = "0";
 }
 
 clearBtn.addEventListener("click", clearAll);
