@@ -19,6 +19,10 @@ body {
   flex-direction: column;
 }
 
+h1 {
+  margin-bottom: 1.5rem;
+}
+
 .container {
   background-color: rgba(0, 0, 0, 0.1);
   width: 320px;
