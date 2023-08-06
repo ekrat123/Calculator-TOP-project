@@ -110,3 +110,40 @@ function deleteLast() {
 }
 
 delBtn.addEventListener("click", deleteLast);
+
+// KeyBoard Codes
+
+window.addEventListener("keydown", handleKeyPress);
+
+function handleKeyPress(e) {
+  const key = e.key;
+
+  if (/[\d+\-*/.=]/.test(key)) {
+    updateDisplayFromKeyboard(key);
+  } else if (key === "Enter") {
+    getResult();
+  } else if (key === "Backspace") {
+    deleteLast();
+  }
+}
+
+function updateDisplayFromKeyboard(key) {
+  if (["+", "-", "*", "/"].includes(key)) {
+    if (operator && firstNum) {
+      getResult();
+    }
+    operator = key;
+    firstNum = display.textContent;
+    display.textContent = firstNum + operator;
+  } else {
+    if (key === "." && !display.textContent.includes(".")) {
+      display.textContent += key;
+    } else {
+      if (display.textContent === "0") {
+        display.textContent = key;
+      } else {
+        display.textContent += key;
+      }
+    }
+  }
+}
